@@ -37,6 +37,7 @@
 			<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
 			<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
 		</Item>
+		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
 		<Item Name="SimulatedPIR" Type="NI-DAQmx Task">
 			<Property Name="\0\AI.Max" Type="Str">5</Property>
 			<Property Name="\0\AI.MeasType" Type="Str">Voltage</Property>
