@@ -21,6 +21,18 @@
 			<Item Name="Manipulate outputs.vi" Type="VI" URL="../Manipulate outputs.vi"/>
 			<Item Name="Set data waveform.vi" Type="VI" URL="../Set data waveform.vi"/>
 		</Item>
+		<Item Name="BluePulseOutput" Type="NI-DAQmx Channel">
+			<Property Name="ChanType" Type="Str">Counter Output</Property>
+			<Property Name="CO.OutputType" Type="Str">Pulse:Time</Property>
+			<Property Name="CO.Pulse.HighTime" Type="Str">0.01</Property>
+			<Property Name="CO.Pulse.IdleState" Type="Str">Low</Property>
+			<Property Name="CO.Pulse.LowTime" Type="Str">0.01</Property>
+			<Property Name="CO.Pulse.Time.InitialDelay" Type="Str">0</Property>
+			<Property Name="CO.Pulse.Time.Units" Type="Str">Seconds</Property>
+			<Property Name="Descr" Type="Str"></Property>
+			<Property Name="Name" Type="Str">BluePulseOutput</Property>
+			<Property Name="PhysicalChanName" Type="Str">Dev3/ctr0</Property>
+		</Item>
 		<Item Name="FanOUT" Type="NI-DAQmx Task">
 			<Property Name="\0\AO.Max" Type="Str">5</Property>
 			<Property Name="\0\AO.Min" Type="Str">0</Property>
@@ -40,7 +52,29 @@
 			<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
 			<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
 		</Item>
+		<Item Name="FanOutputChannel" Type="NI-DAQmx Channel">
+			<Property Name="AO.Max" Type="Str">10</Property>
+			<Property Name="AO.Min" Type="Str">-10</Property>
+			<Property Name="AO.OutputType" Type="Str">Voltage</Property>
+			<Property Name="AO.TermCfg" Type="Str">RSE</Property>
+			<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
+			<Property Name="ChanType" Type="Str">Analog Output</Property>
+			<Property Name="Descr" Type="Str"></Property>
+			<Property Name="Name" Type="Str">FanOutputChannel</Property>
+			<Property Name="PhysicalChanName" Type="Str">Dev3/ao0</Property>
+		</Item>
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
+		<Item Name="LEDOutputChannel" Type="NI-DAQmx Channel">
+			<Property Name="AO.Max" Type="Str">10</Property>
+			<Property Name="AO.Min" Type="Str">-10</Property>
+			<Property Name="AO.OutputType" Type="Str">Voltage</Property>
+			<Property Name="AO.TermCfg" Type="Str">RSE</Property>
+			<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
+			<Property Name="ChanType" Type="Str">Analog Output</Property>
+			<Property Name="Descr" Type="Str"></Property>
+			<Property Name="Name" Type="Str">LEDOutputChannel</Property>
+			<Property Name="PhysicalChanName" Type="Str">Dev3/ao1</Property>
+		</Item>
 		<Item Name="SimulatedPIR" Type="NI-DAQmx Task">
 			<Property Name="\0\AI.Max" Type="Str">5</Property>
 			<Property Name="\0\AI.MeasType" Type="Str">Voltage</Property>
@@ -146,7 +180,6 @@
 				<Item Name="CloseDataObjectRefnum.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/CloseDataObjectRefnum.vi"/>
 				<Item Name="CloseDataStorage.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/CloseDataStorage.vi"/>
 				<Item Name="CloseDataStorageRefnum.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/CloseDataStorageRefnum.vi"/>
-				<Item Name="Color to RGB.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/colorconv.llb/Color to RGB.vi"/>
 				<Item Name="compatCalcOffset.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatCalcOffset.vi"/>
 				<Item Name="compatFileDialog.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatFileDialog.vi"/>
 				<Item Name="compatOpenFileOperation.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/compatOpenFileOperation.vi"/>
