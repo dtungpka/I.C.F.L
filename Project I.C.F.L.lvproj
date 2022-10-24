@@ -10,6 +10,79 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="Channels" Type="Folder">
+			<Item Name="BluePulseOutput" Type="NI-DAQmx Channel">
+				<Property Name="ChanType" Type="Str">Counter Output</Property>
+				<Property Name="CO.OutputType" Type="Str">Pulse:Time</Property>
+				<Property Name="CO.Pulse.HighTime" Type="Str">0.01</Property>
+				<Property Name="CO.Pulse.IdleState" Type="Str">Low</Property>
+				<Property Name="CO.Pulse.LowTime" Type="Str">0.01</Property>
+				<Property Name="CO.Pulse.Time.InitialDelay" Type="Str">0</Property>
+				<Property Name="CO.Pulse.Time.Units" Type="Str">Seconds</Property>
+				<Property Name="Descr" Type="Str"></Property>
+				<Property Name="Name" Type="Str">BluePulseOutput</Property>
+				<Property Name="PhysicalChanName" Type="Str">Dev3/ctr0</Property>
+			</Item>
+			<Item Name="FanOUT" Type="NI-DAQmx Task">
+				<Property Name="\0\AO.Max" Type="Str">5</Property>
+				<Property Name="\0\AO.Min" Type="Str">0</Property>
+				<Property Name="\0\AO.OutputType" Type="Str">Voltage</Property>
+				<Property Name="\0\AO.TermCfg" Type="Str">RSE</Property>
+				<Property Name="\0\AO.Voltage.Units" Type="Str">Volts</Property>
+				<Property Name="\0\ChanType" Type="Str">Analog Output</Property>
+				<Property Name="\0\Name" Type="Str">FanOUT/VoltageOut</Property>
+				<Property Name="\0\PhysicalChanName" Type="Str">Dev2/ao0</Property>
+				<Property Name="Channels" Type="Str">FanOUT/VoltageOut</Property>
+				<Property Name="Name" Type="Str">FanOUT</Property>
+				<Property Name="RegenMode" Type="Str">Allow Regeneration</Property>
+				<Property Name="SampClk.ActiveEdge" Type="Str">Rising</Property>
+				<Property Name="SampClk.Rate" Type="Str">1000</Property>
+				<Property Name="SampClk.Src" Type="Str"></Property>
+				<Property Name="SampQuant.SampMode" Type="Str">Continuous Samples</Property>
+				<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
+				<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
+			</Item>
+			<Item Name="FanOutputChannel" Type="NI-DAQmx Channel">
+				<Property Name="AO.Max" Type="Str">10</Property>
+				<Property Name="AO.Min" Type="Str">-10</Property>
+				<Property Name="AO.OutputType" Type="Str">Voltage</Property>
+				<Property Name="AO.TermCfg" Type="Str">RSE</Property>
+				<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
+				<Property Name="ChanType" Type="Str">Analog Output</Property>
+				<Property Name="Descr" Type="Str"></Property>
+				<Property Name="Name" Type="Str">FanOutputChannel</Property>
+				<Property Name="PhysicalChanName" Type="Str">Dev3/ao0</Property>
+			</Item>
+			<Item Name="LEDOutputChannel" Type="NI-DAQmx Channel">
+				<Property Name="AO.Max" Type="Str">10</Property>
+				<Property Name="AO.Min" Type="Str">-10</Property>
+				<Property Name="AO.OutputType" Type="Str">Voltage</Property>
+				<Property Name="AO.TermCfg" Type="Str">RSE</Property>
+				<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
+				<Property Name="ChanType" Type="Str">Analog Output</Property>
+				<Property Name="Descr" Type="Str"></Property>
+				<Property Name="Name" Type="Str">LEDOutputChannel</Property>
+				<Property Name="PhysicalChanName" Type="Str">Dev3/ao1</Property>
+			</Item>
+			<Item Name="SimulatedPIR" Type="NI-DAQmx Task">
+				<Property Name="\0\AI.Max" Type="Str">5</Property>
+				<Property Name="\0\AI.MeasType" Type="Str">Voltage</Property>
+				<Property Name="\0\AI.Min" Type="Str">-5</Property>
+				<Property Name="\0\AI.TermCfg" Type="Str">RSE</Property>
+				<Property Name="\0\AI.Voltage.Units" Type="Str">Volts</Property>
+				<Property Name="\0\ChanType" Type="Str">Analog Input</Property>
+				<Property Name="\0\Name" Type="Str">SimulatedPIR/Voltage</Property>
+				<Property Name="\0\PhysicalChanName" Type="Str">Dev2/ai0</Property>
+				<Property Name="Channels" Type="Str">SimulatedPIR/Voltage</Property>
+				<Property Name="Name" Type="Str">SimulatedPIR</Property>
+				<Property Name="SampClk.ActiveEdge" Type="Str">Rising</Property>
+				<Property Name="SampClk.Rate" Type="Str">1000</Property>
+				<Property Name="SampClk.Src" Type="Str"></Property>
+				<Property Name="SampQuant.SampMode" Type="Str">Continuous Samples</Property>
+				<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
+				<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
+			</Item>
+		</Item>
 		<Item Name="Error Handler" Type="Folder">
 			<Item Name="DAQ error handler.vi" Type="VI" URL="../DAQ error handler.vi"/>
 			<Item Name="Error collector.vi" Type="VI" URL="../Error collector.vi"/>
@@ -21,78 +94,7 @@
 			<Item Name="Manipulate outputs.vi" Type="VI" URL="../Manipulate outputs.vi"/>
 			<Item Name="Set data waveform.vi" Type="VI" URL="../Set data waveform.vi"/>
 		</Item>
-		<Item Name="BluePulseOutput" Type="NI-DAQmx Channel">
-			<Property Name="ChanType" Type="Str">Counter Output</Property>
-			<Property Name="CO.OutputType" Type="Str">Pulse:Time</Property>
-			<Property Name="CO.Pulse.HighTime" Type="Str">0.01</Property>
-			<Property Name="CO.Pulse.IdleState" Type="Str">Low</Property>
-			<Property Name="CO.Pulse.LowTime" Type="Str">0.01</Property>
-			<Property Name="CO.Pulse.Time.InitialDelay" Type="Str">0</Property>
-			<Property Name="CO.Pulse.Time.Units" Type="Str">Seconds</Property>
-			<Property Name="Descr" Type="Str"></Property>
-			<Property Name="Name" Type="Str">BluePulseOutput</Property>
-			<Property Name="PhysicalChanName" Type="Str">Dev3/ctr0</Property>
-		</Item>
-		<Item Name="FanOUT" Type="NI-DAQmx Task">
-			<Property Name="\0\AO.Max" Type="Str">5</Property>
-			<Property Name="\0\AO.Min" Type="Str">0</Property>
-			<Property Name="\0\AO.OutputType" Type="Str">Voltage</Property>
-			<Property Name="\0\AO.TermCfg" Type="Str">RSE</Property>
-			<Property Name="\0\AO.Voltage.Units" Type="Str">Volts</Property>
-			<Property Name="\0\ChanType" Type="Str">Analog Output</Property>
-			<Property Name="\0\Name" Type="Str">FanOUT/VoltageOut</Property>
-			<Property Name="\0\PhysicalChanName" Type="Str">Dev2/ao0</Property>
-			<Property Name="Channels" Type="Str">FanOUT/VoltageOut</Property>
-			<Property Name="Name" Type="Str">FanOUT</Property>
-			<Property Name="RegenMode" Type="Str">Allow Regeneration</Property>
-			<Property Name="SampClk.ActiveEdge" Type="Str">Rising</Property>
-			<Property Name="SampClk.Rate" Type="Str">1000</Property>
-			<Property Name="SampClk.Src" Type="Str"></Property>
-			<Property Name="SampQuant.SampMode" Type="Str">Continuous Samples</Property>
-			<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
-			<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
-		</Item>
-		<Item Name="FanOutputChannel" Type="NI-DAQmx Channel">
-			<Property Name="AO.Max" Type="Str">10</Property>
-			<Property Name="AO.Min" Type="Str">-10</Property>
-			<Property Name="AO.OutputType" Type="Str">Voltage</Property>
-			<Property Name="AO.TermCfg" Type="Str">RSE</Property>
-			<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
-			<Property Name="ChanType" Type="Str">Analog Output</Property>
-			<Property Name="Descr" Type="Str"></Property>
-			<Property Name="Name" Type="Str">FanOutputChannel</Property>
-			<Property Name="PhysicalChanName" Type="Str">Dev3/ao0</Property>
-		</Item>
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
-		<Item Name="LEDOutputChannel" Type="NI-DAQmx Channel">
-			<Property Name="AO.Max" Type="Str">10</Property>
-			<Property Name="AO.Min" Type="Str">-10</Property>
-			<Property Name="AO.OutputType" Type="Str">Voltage</Property>
-			<Property Name="AO.TermCfg" Type="Str">RSE</Property>
-			<Property Name="AO.Voltage.Units" Type="Str">Volts</Property>
-			<Property Name="ChanType" Type="Str">Analog Output</Property>
-			<Property Name="Descr" Type="Str"></Property>
-			<Property Name="Name" Type="Str">LEDOutputChannel</Property>
-			<Property Name="PhysicalChanName" Type="Str">Dev3/ao1</Property>
-		</Item>
-		<Item Name="SimulatedPIR" Type="NI-DAQmx Task">
-			<Property Name="\0\AI.Max" Type="Str">5</Property>
-			<Property Name="\0\AI.MeasType" Type="Str">Voltage</Property>
-			<Property Name="\0\AI.Min" Type="Str">-5</Property>
-			<Property Name="\0\AI.TermCfg" Type="Str">RSE</Property>
-			<Property Name="\0\AI.Voltage.Units" Type="Str">Volts</Property>
-			<Property Name="\0\ChanType" Type="Str">Analog Input</Property>
-			<Property Name="\0\Name" Type="Str">SimulatedPIR/Voltage</Property>
-			<Property Name="\0\PhysicalChanName" Type="Str">Dev2/ai0</Property>
-			<Property Name="Channels" Type="Str">SimulatedPIR/Voltage</Property>
-			<Property Name="Name" Type="Str">SimulatedPIR</Property>
-			<Property Name="SampClk.ActiveEdge" Type="Str">Rising</Property>
-			<Property Name="SampClk.Rate" Type="Str">1000</Property>
-			<Property Name="SampClk.Src" Type="Str"></Property>
-			<Property Name="SampQuant.SampMode" Type="Str">Continuous Samples</Property>
-			<Property Name="SampQuant.SampPerChan" Type="Str">100</Property>
-			<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
-		</Item>
 		<Item Name="UI Main.vi" Type="VI" URL="../UI Main.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
