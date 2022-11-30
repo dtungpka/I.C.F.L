@@ -90,6 +90,7 @@
 			<Item Name="Simulation check.vi" Type="VI" URL="../Simulation check.vi"/>
 		</Item>
 		<Item Name="subVIs" Type="Folder">
+			<Item Name="Create schedule.vi" Type="VI" URL="../Create schedule.vi"/>
 			<Item Name="Get color.vi" Type="VI" URL="../Get color.vi"/>
 			<Item Name="Manipulate outputs.vi" Type="VI" URL="../Manipulate outputs.vi"/>
 			<Item Name="Set data waveform.vi" Type="VI" URL="../Set data waveform.vi"/>
