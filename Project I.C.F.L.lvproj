@@ -2,6 +2,7 @@
 <Project Type="Project" LVVersion="20008000">
 	<Property Name="varPersistentID:{9BC80F6E-A64D-4BBA-8EA3-CC5B105A9131}" Type="Ref">/My Computer/Main Library.lvlib/Schedules</Property>
 	<Item Name="My Computer" Type="My Computer">
+		<Property Name="NI.SortType" Type="Int">3</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -98,16 +99,22 @@
 			<Item Name="Manipulate outputs.vi" Type="VI" URL="../Manipulate outputs.vi"/>
 			<Item Name="Set data waveform.vi" Type="VI" URL="../Set data waveform.vi"/>
 			<Item Name="SortSchedules.vi" Type="VI" URL="../SortSchedules.vi"/>
+			<Item Name="Convert time down.vi" Type="VI" URL="../Convert time down.vi"/>
+			<Item Name="Convert time.vi" Type="VI" URL="../Convert time.vi"/>
+			<Item Name="Get second.vi" Type="VI" URL="../Get second.vi"/>
+			<Item Name="Update time schedule.vi" Type="VI" URL="../Update time schedule.vi"/>
+			<Item Name="Get Epoch.vi" Type="VI" URL="../Get Epoch.vi"/>
+			<Item Name="Execute schedule event.vi" Type="VI" URL="../Execute schedule event.vi"/>
 		</Item>
 		<Item Name="Typedefs" Type="Folder">
 			<Item Name="Mode.ctl" Type="VI" URL="../Typedef/Mode.ctl"/>
+			<Item Name="Repeat.ctl" Type="VI" URL="../Typedef/Repeat.ctl"/>
+			<Item Name="Schedule.ctl" Type="VI" URL="../Typedef/Schedule.ctl"/>
+			<Item Name="Schedules Array.ctl" Type="VI" URL="../Typedef/Schedules Array.ctl"/>
+			<Item Name="Action.ctl" Type="VI" URL="../Typedef/Action.ctl"/>
 		</Item>
-		<Item Name="Action.ctl" Type="VI" URL="../Typedef/Action.ctl"/>
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
 		<Item Name="Main Library.lvlib" Type="Library" URL="../Main Library.lvlib"/>
-		<Item Name="Repeat.ctl" Type="VI" URL="../Typedef/Repeat.ctl"/>
-		<Item Name="Schedule.ctl" Type="VI" URL="../Typedef/Schedule.ctl"/>
-		<Item Name="Schedules Array.ctl" Type="VI" URL="../Typedef/Schedules Array.ctl"/>
 		<Item Name="UI Main.vi" Type="VI" URL="../UI Main.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
