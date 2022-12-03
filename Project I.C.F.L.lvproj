@@ -1,6 +1,8 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <Project Type="Project" LVVersion="20008000">
+	<Property Name="varPersistentID:{9BC80F6E-A64D-4BBA-8EA3-CC5B105A9131}" Type="Ref">/My Computer/Main Library.lvlib/Schedules</Property>
 	<Item Name="My Computer" Type="My Computer">
+		<Property Name="NI.SortType" Type="Int">3</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -90,12 +92,36 @@
 			<Item Name="Simulation check.vi" Type="VI" URL="../Simulation check.vi"/>
 		</Item>
 		<Item Name="subVIs" Type="Folder">
+			<Item Name="Calculate schedules time.vi" Type="VI" URL="../Calculate schedules time.vi"/>
+			<Item Name="Change mode.vi" Type="VI" URL="../Change mode.vi"/>
+			<Item Name="Create schedule.vi" Type="VI" URL="../Create schedule.vi"/>
 			<Item Name="Get color.vi" Type="VI" URL="../Get color.vi"/>
 			<Item Name="Manipulate outputs.vi" Type="VI" URL="../Manipulate outputs.vi"/>
 			<Item Name="Set data waveform.vi" Type="VI" URL="../Set data waveform.vi"/>
+			<Item Name="SortSchedules.vi" Type="VI" URL="../SortSchedules.vi"/>
+			<Item Name="Convert time down.vi" Type="VI" URL="../Convert time down.vi"/>
+			<Item Name="Convert time.vi" Type="VI" URL="../Convert time.vi"/>
+			<Item Name="Get second.vi" Type="VI" URL="../Get second.vi"/>
+			<Item Name="Update time schedule.vi" Type="VI" URL="../Update time schedule.vi"/>
+			<Item Name="Get Epoch.vi" Type="VI" URL="../Get Epoch.vi"/>
+			<Item Name="Execute schedule event.vi" Type="VI" URL="../Execute schedule event.vi"/>
+			<Item Name="Console Add.vi" Type="VI" URL="../Console Add.vi"/>
+			<Item Name="String To GUID Cluster.vi" Type="VI" URL="../String To GUID Cluster.vi"/>
+			<Item Name="Win32 Decode Img Stream.vi" Type="VI" URL="../Win32 Decode Img Stream.vi"/>
+			<Item Name="Retry TCP.vi" Type="VI" URL="../Retry TCP.vi"/>
+		</Item>
+		<Item Name="Typedefs" Type="Folder">
+			<Item Name="Mode.ctl" Type="VI" URL="../Typedef/Mode.ctl"/>
+			<Item Name="Repeat.ctl" Type="VI" URL="../Typedef/Repeat.ctl"/>
+			<Item Name="Schedule.ctl" Type="VI" URL="../Typedef/Schedule.ctl"/>
+			<Item Name="Schedules Array.ctl" Type="VI" URL="../Typedef/Schedules Array.ctl"/>
+			<Item Name="Action.ctl" Type="VI" URL="../Typedef/Action.ctl"/>
 		</Item>
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
+		<Item Name="Main Library.lvlib" Type="Library" URL="../Main Library.lvlib"/>
 		<Item Name="UI Main.vi" Type="VI" URL="../UI Main.vi"/>
+		<Item Name="Commands.ctl" Type="VI" URL="../Typedef/Commands.ctl"/>
+		<Item Name="Sender.ctl" Type="VI" URL="../Typedef/Sender.ctl"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="__closeStorageFromObject.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/__closeStorageFromObject.vi"/>
@@ -169,6 +195,7 @@
 				<Item Name="_TDM_DATA_MODEL.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/_TDM_DATA_MODEL.vi"/>
 				<Item Name="_WaveformProperties.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/lvStorage.llb/_WaveformProperties.vi"/>
 				<Item Name="_wf_attributes.ctl" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/lvStorage.llb/_wf_attributes.ctl"/>
+				<Item Name="Assert Block Data Type.vim" Type="VI" URL="/&lt;vilib&gt;/Utility/TypeAssert/Assert Block Data Type.vim"/>
 				<Item Name="Boolean Array to Digital.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDT.llb/Boolean Array to Digital.vi"/>
 				<Item Name="Build Exp Wvfrm (Cluster).vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/transition.llb/Build Exp Wvfrm (Cluster).vi"/>
 				<Item Name="Build Exp Wvfrm (Wvfrm).vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/transition.llb/Build Exp Wvfrm (Wvfrm).vi"/>
@@ -562,6 +589,9 @@
 				<Item Name="Set Property.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/Set Property.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
+				<Item Name="Sort 2D Array - Pop Stack.vi" Type="VI" URL="/&lt;vilib&gt;/Array/Sort 2D Array - Pop Stack.vi"/>
+				<Item Name="Sort 2D Array - Push Stack.vi" Type="VI" URL="/&lt;vilib&gt;/Array/Sort 2D Array - Push Stack.vi"/>
+				<Item Name="Sort 2D Array.vim" Type="VI" URL="/&lt;vilib&gt;/Array/Sort 2D Array.vim"/>
 				<Item Name="Space Constant.vi" Type="VI" URL="/&lt;vilib&gt;/dlg_ctls.llb/Space Constant.vi"/>
 				<Item Name="specialProperties.ctl" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/specialProperties.ctl"/>
 				<Item Name="TagReturnType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/TagReturnType.ctl"/>
@@ -588,11 +618,33 @@
 				<Item Name="WDT Number of Waveform Samples SGL.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/WDT Number of Waveform Samples SGL.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 				<Item Name="Write File+ (string).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write File+ (string).vi"/>
+				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
+				<Item Name="IMAQ Image.ctl" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/IMAQ Image.ctl"/>
+				<Item Name="IMAQ ReadFile 2" Type="VI" URL="/&lt;vilib&gt;/vision/Files.llb/IMAQ ReadFile 2"/>
+				<Item Name="Image Type" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Image Type"/>
+				<Item Name="IMAQ Create" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Create"/>
+				<Item Name="Color (U64)" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Color (U64)"/>
+				<Item Name="IMAQ ArrayToColorImage" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ ArrayToColorImage"/>
 			</Item>
 			<Item Name="lvStorage.dll" Type="Document" URL="lvStorage.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="ole32.dll" Type="Document" URL="ole32.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="windowscodecs.dll" Type="Document" URL="windowscodecs.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="shlwapi.dll" Type="Document" URL="shlwapi.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="nivision.dll" Type="Document" URL="nivision.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="nivissvc.dll" Type="Document" URL="nivissvc.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 		</Item>
