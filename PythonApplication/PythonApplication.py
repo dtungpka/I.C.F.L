@@ -188,10 +188,10 @@ class PyMain():
                     chk = self.checkBound(x,y)
                     val = self.drawRECT(frame,x,y,CIR_COLOR,-1,chk)
                     if chk == 'left':
-                        PyMain.LEFT_val = val
+                        PyMain.LEFT_val = val*100
                         self.changing_val= self.changing_val.replace("none left",'')
                     elif chk == 'right':
-                        PyMain.RIGHT_val = val
+                        PyMain.RIGHT_val = val*100
                         self.changing_val= self.changing_val.replace("none right",'')
             if self.changing_val:
                 self.drawRECT(frame,0,0,SELECT_COLOR,-1,self.changing_val)   
@@ -225,7 +225,13 @@ class PyMain():
             print('Video stream connected by', self.mjpeg_address)
             #respond with "Hello"
             clearence = [False,False,False]
+            curr_command = 0
+            
             while True:
+                commands = [
+                [b'OMV',b'%d,%d' % (PyMain.LEFT_val,PyMain.RIGHT_val)],
+                [b'OMF',PyMain.jpg_bin]
+                ]
                 if PyMain.jpg_bin is None:
                     continue
                 
@@ -236,25 +242,26 @@ class PyMain():
                 if  data == b'RDY':
                     clearence[0] = True
                     try: 
-                        self.mjpeg_connection.sendall(b'%05d' % len(PyMain.jpg_bin))
+                        self.mjpeg_connection.sendall(b'%05d' % len(commands[curr_command][1]))
                     except:
                         break
                 if data == b'OK0':
                     clearence[1] = True
                     try:
-                        self.mjpeg_connection.sendall(b'OMF')
+                        self.mjpeg_connection.sendall(commands[curr_command][0])
                     except:
                         break
                 if data == b'OK1':
                     clearence[2] = True
                 if all(clearence):
                     try: 
-                        self.mjpeg_connection.sendall(PyMain.jpg_bin)
+                        self.mjpeg_connection.sendall(commands[curr_command][1])
                     except:
                         break
                     clearence = [False,False,False]
                 if data == b'END':
                     clearence = [False,False,False]
+                    curr_command = 0 if curr_command == len(commands) -1 else curr_command +1
                 if data == b'ERO':
                     break
     def TCP_COMMAND(self):
@@ -262,7 +269,38 @@ class PyMain():
             while True:
                 self.command_address,self.command_address = command_sock.accept()  
                 print('Labview connected: ', self.command_address)
-                
+                clearence = [False,False,False]
+                while True:
+                    
+                    to_send = b'%d,%d' % (PyMain.LEFT_val,PyMain.RIGHT_val)
+                    try: 
+                        data = self.mjpeg_connection.recv(3)
+                    except:
+                        break
+                    if  data == b'RDY':
+                        clearence[0] = True
+                        try: 
+                            self.mjpeg_connection.sendall(b'%05d' % len(to_send))
+                        except:
+                            break
+                    if data == b'OK0':
+                        clearence[1] = True
+                        try:
+                            self.mjpeg_connection.sendall(b'OMV')
+                        except:
+                            break
+                    if data == b'OK1':
+                        clearence[2] = True
+                    if all(clearence):
+                        try: 
+                            self.mjpeg_connection.sendall(to_send)
+                        except:
+                            break
+                        clearence = [False,False,False]
+                    if data == b'END':
+                        clearence = [False,False,False]
+                    if data == b'ERO':
+                        break
                 
         
         
