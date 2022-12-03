@@ -62,11 +62,11 @@ IP = 'localhost'
 PORT = 3939
 MJPEG_PORT = 39399
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-sock.bind((IP, PORT))  
+sock.bind((IP, MJPEG_PORT))  
 sock.listen()  
-mjpeg_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-mjpeg_sock.bind((IP, MJPEG_PORT)) 
-mjpeg_sock.listen() 
+command_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+command_sock.bind((IP, PORT)) 
+command_sock.listen() 
 findHands = ORM.MpHands()
 
 
@@ -164,6 +164,8 @@ class PyMain():
         print("Running..")
         thread = threading.Thread(target=self.TCPMJPEG)
         thread.start()
+        thread = threading.Thread(target=self.TCP_COMMAND)
+        thread.start()
         while True:
             
             success, frame = self.cam.read()
@@ -214,9 +216,12 @@ class PyMain():
     def getPacketSize(self,packet):
         return len(packet)
     def TCPMJPEG(self):
-        print("MJPEG Server started at", mjpeg_sock.getsockname())
+        print("MJPEG Server started at", sock.getsockname())
+        with open('Connected','w') as cntd:
+            cntd.write('')
+            cntd.close()
         while True:
-            self.mjpeg_connection,self.mjpeg_address = mjpeg_sock.accept()  
+            self.mjpeg_connection,self.mjpeg_address = sock.accept()  
             print('Video stream connected by', self.mjpeg_address)
             #respond with "Hello"
             clearence = [False,False,False]
@@ -252,7 +257,11 @@ class PyMain():
                     clearence = [False,False,False]
                 if data == b'ERO':
                     break
-
+    def TCP_COMMAND(self):
+            print("Command Server started at", command_sock.getsockname())
+            while True:
+                self.command_address,self.command_address = command_sock.accept()  
+                print('Labview connected: ', self.command_address)
                 
                 
         
