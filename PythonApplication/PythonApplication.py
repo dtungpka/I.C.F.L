@@ -153,17 +153,20 @@ class PyMain():
     cam_feed = None
     jpg_bin = None
     y_hold = [lEFT_CONTROL_UI_END[1],RIGHT_CONTROL_UI_END[1]]
+    MJPEG_watchdog = 0
     def __init__(self):
         self.cam = cv2.VideoCapture(CAM_SELECTED) # CAP_DSHOW enables direct show without buffering
         self.cam.set(cv2.CAP_PROP_FRAME_WIDTH, CAM_WIDTH)    # Set width of the frame
         self.cam.set(cv2.CAP_PROP_FRAME_HEIGHT, CAM_HEIGHT)  # Set height of the frame
         self.cam.set(cv2.CAP_PROP_FPS, CAM_FPS)  # Set fps of the camera
         self.cam.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG')) # Set the codec as 'MJPG'
-        self.MJPEG_Server()
+        #self.MJPEG_Server()
     def run(self):
         print("Running..")
-        thread = threading.Thread(target=self.TCP)
-        thread.start()
+        thread1 = threading.Thread(target=self.TCP)
+        thread1.start()
+        thread2 = threading.Thread(target=self.TCPMJPEG)
+        thread2.start()
         while True:
             
             success, frame = self.cam.read()
@@ -198,6 +201,9 @@ class PyMain():
                 low_res = cv2.resize(frame,(360,203))
                 PyMain.cam_feed = low_res
                 self.convIMG(low_res)
+            if PyMain.MJPEG_watchdog + 2500 < time.time():
+                #force restart thread2
+                thread2 = threading.Thread(target=self.TCPMJPEG)
                 
             cv2.imshow("frame", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -213,15 +219,15 @@ class PyMain():
             return None
     def getPacketSize(self,packet):
         return len(packet)
-    def TCPMJPEG(self):
-        print("MJPEG Server started at", mjpeg_sock.getsockname())
+    def TCP(self):
+        print("TCP Server started at", sock.getsockname())
         while True:
-            self.mjpeg_connection,self.mjpeg_address = mjpeg_sock.accept()  
-            print('Video stream connected by', self.mjpeg_address)
+            self.connection,self.address = sock.accept()  
+            print('TCP command client', self.address)
             #respond with "Hello"
             clearence = [False,False,False]
             while True:
-                if PyMain.jpg_bin is None:
+                if True:
                     continue
                 
                 try: 
@@ -252,6 +258,54 @@ class PyMain():
                     clearence = [False,False,False]
                 if data == b'ERO':
                     break
+    def TCPMJPEG(self):
+        print("MJPEG Server started at", mjpeg_sock.getsockname())
+        while True:
+            self.mjpeg_connection,self.mjpeg_address = mjpeg_sock.accept()  
+            print('Video stream connected by', self.mjpeg_address)
+            #respond with "Hello"
+            watch_dog_start = -1
+            clearence = [False,False,False]
+            while True:
+                PyMain.MJPEG_watchdog = time.time()
+                if PyMain.jpg_bin is None:
+                    continue
+                
+                try: 
+                    data = self.mjpeg_connection.recv(1024)
+                    print(data)
+                except:
+                    break
+                if  data == b'RDY':
+                    clearence[0] = True
+                    try: 
+                        self.mjpeg_connection.sendall(b'%05d' % len(PyMain.jpg_bin))
+                    except:
+                        break
+                if data == b'OK0':
+                    clearence[1] = True
+                    try:
+                        self.mjpeg_connection.sendall(b'OMF')
+                    except:
+                        break
+                if data == b'OK1':
+                    clearence[2] = True
+                if all(clearence):
+                    try: 
+                        self.mjpeg_connection.sendall(PyMain.jpg_bin)
+                    except:
+                        break
+                    clearence = [False,False,False]
+                if data == b'END':
+                    clearence = [False,False,False]
+                if data == b'ERO':
+                    break
+                if data == b'':
+                    if watch_dog_start == -1:
+                        watch_dog_start = time.time()
+                    if time.time() - watch_dog_start > 5:
+                        print("Client timed out")
+                        break
 
                 
                 
