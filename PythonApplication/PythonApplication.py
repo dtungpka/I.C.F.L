@@ -162,7 +162,7 @@ class PyMain():
         self.MJPEG_Server()
     def run(self):
         print("Running..")
-        thread = threading.Thread(target=self.TCP)
+        thread = threading.Thread(target=self.TCPMJPEG)
         thread.start()
         while True:
             
@@ -294,7 +294,7 @@ class PyMain():
                 
         
     def MJPEG_Server(self):
-        server = HTTPServer((IP, MJPEG_PORT), mjpgServer)
+        server = HTTPServer((IP, 34534), mjpgServer)
         print("server started on {}:{}".format(IP, MJPEG_PORT))
         self.srvThread = threading.Thread(target=server.serve_forever,daemon=True )
         self.srvThread.start()
