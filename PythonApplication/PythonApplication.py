@@ -60,9 +60,8 @@ SELECT_COLOR = (0, 0, 255)
 SELECT_THICKNESS = 3
 IP = 'localhost'
 PORT = 3939
-MJPEG_PORT = 39399
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-sock.bind((IP, MJPEG_PORT))  
+sock.bind((IP, PORT))  
 sock.listen()  
 findHands = ORM.MpHands()
 
@@ -310,7 +309,7 @@ class PyMain():
         
     def MJPEG_Server(self):
         server = HTTPServer((IP, 34534), mjpgServer)
-        print("server started on {}:{}".format(IP, MJPEG_PORT))
+        print("server started on {}:{}".format(IP, 34534))
         self.srvThread = threading.Thread(target=server.serve_forever,daemon=True )
         self.srvThread.start()
             
