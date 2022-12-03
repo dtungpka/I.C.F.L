@@ -64,9 +64,6 @@ MJPEG_PORT = 39399
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
 sock.bind((IP, MJPEG_PORT))  
 sock.listen()  
-command_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-command_sock.bind((IP, PORT)) 
-command_sock.listen() 
 findHands = ORM.MpHands()
 
 
@@ -148,8 +145,8 @@ class mjpgServer(BaseHTTPRequestHandler):
 
 class PyMain():
     SendHand = True
-    LEFT_val = 0
-    RIGHT_val = 0
+    LEFT_val = -1
+    RIGHT_val = -1
     cam_feed = None
     jpg_bin = None
     y_hold = [lEFT_CONTROL_UI_END[1],RIGHT_CONTROL_UI_END[1]]
@@ -164,8 +161,7 @@ class PyMain():
         print("Running..")
         thread = threading.Thread(target=self.TCPMJPEG)
         thread.start()
-        thread = threading.Thread(target=self.TCP_COMMAND)
-        thread.start()
+        self.MJPEG_Server() #MJPEG debug server
         while True:
             
             success, frame = self.cam.read()
@@ -193,8 +189,13 @@ class PyMain():
                     elif chk == 'right':
                         PyMain.RIGHT_val = val*100
                         self.changing_val= self.changing_val.replace("none right",'')
+                    if 'none left' in self.changing_val:
+                        PyMain.LEFT_val = -1
+                    if 'none right' in self.changing_val:
+                        PyMain.RIGHT_val = -1
             if self.changing_val:
-                self.drawRECT(frame,0,0,SELECT_COLOR,-1,self.changing_val)   
+                self.drawRECT(frame,0,0,SELECT_COLOR,-1,self.changing_val) 
+                
             if PyMain.SendHand:
                 #resize to 360x203
                 low_res = cv2.resize(frame,(360,203))
@@ -232,6 +233,7 @@ class PyMain():
                 [b'OMV',b'%d,%d' % (PyMain.LEFT_val,PyMain.RIGHT_val)],
                 [b'OMF',PyMain.jpg_bin]
                 ]
+                
                 if PyMain.jpg_bin is None:
                     continue
                 
@@ -264,43 +266,7 @@ class PyMain():
                     curr_command = 0 if curr_command == len(commands) -1 else curr_command +1
                 if data == b'ERO':
                     break
-    def TCP_COMMAND(self):
-            print("Command Server started at", command_sock.getsockname())
-            while True:
-                self.command_address,self.command_address = command_sock.accept()  
-                print('Labview connected: ', self.command_address)
-                clearence = [False,False,False]
-                while True:
-                    
-                    to_send = b'%d,%d' % (PyMain.LEFT_val,PyMain.RIGHT_val)
-                    try: 
-                        data = self.mjpeg_connection.recv(3)
-                    except:
-                        break
-                    if  data == b'RDY':
-                        clearence[0] = True
-                        try: 
-                            self.mjpeg_connection.sendall(b'%05d' % len(to_send))
-                        except:
-                            break
-                    if data == b'OK0':
-                        clearence[1] = True
-                        try:
-                            self.mjpeg_connection.sendall(b'OMV')
-                        except:
-                            break
-                    if data == b'OK1':
-                        clearence[2] = True
-                    if all(clearence):
-                        try: 
-                            self.mjpeg_connection.sendall(to_send)
-                        except:
-                            break
-                        clearence = [False,False,False]
-                    if data == b'END':
-                        clearence = [False,False,False]
-                    if data == b'ERO':
-                        break
+    
                 
         
         
@@ -311,12 +277,14 @@ class PyMain():
             #draw rect from start to left_val 
             cv2.rectangle(frame, lEFT_CONTROL_UI_END, (lEFT_CONTROL_UI_START[0], y), color, size)
             cv2.putText(frame, str(left_val), LEFT_CONTROL_CAP, cv2.FONT_HERSHEY_PLAIN, 3, CIR_COLOR, 3)
+            cv2.putText(frame,'FAN',(x-40,y),cv2.FONT_HERSHEY_PLAIN, 3, CIR_COLOR, 3)
             PyMain.y_hold[0] = y
             return left_val
         elif chk == "right":
             right_val = round(1- (y - RIGHT_CONTROL_UI_START[1]) / (RIGHT_CONTROL_UI_END[1] - RIGHT_CONTROL_UI_START[1]),2)
             cv2.rectangle(frame, RIGHT_CONTROL_UI_END, (RIGHT_CONTROL_UI_START[0], y),color, size)
             cv2.putText(frame, str(right_val), RIGHT_CONTROL_CAP, cv2.FONT_HERSHEY_PLAIN, 3, CIR_COLOR, 3)
+            cv2.putText(frame,'LED',(x-40,y),cv2.FONT_HERSHEY_PLAIN, 3, CIR_COLOR, 3)
             PyMain.y_hold[1] = y
             return right_val
         if "none left" in chk:
