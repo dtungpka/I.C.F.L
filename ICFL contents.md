@@ -33,5 +33,6 @@
          4. Send command procedure
          5. Commands syntax
 4. Result
-5. Ref
-6. Appendix A: Command table
+5. Further devs
+6. Ref
+7. Appendix A: Command table
