@@ -1,4 +1,15 @@
-﻿import socket,os,sys
+﻿'''
+###########################################
+#                                         #
+#           S.S.I.C.F.L Project           #
+#                                         #
+###########################################
+
+
+'''
+
+
+import socket,os,sys
 import time
 import cv2
 import numpy as np
