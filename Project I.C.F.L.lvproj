@@ -116,12 +116,12 @@
 			<Item Name="Schedule.ctl" Type="VI" URL="../Typedef/Schedule.ctl"/>
 			<Item Name="Schedules Array.ctl" Type="VI" URL="../Typedef/Schedules Array.ctl"/>
 			<Item Name="Action.ctl" Type="VI" URL="../Typedef/Action.ctl"/>
-			<Item Name="Commands.ctl" Type="VI" URL="../Typedef/Commands.ctl"/>
-			<Item Name="Sender.ctl" Type="VI" URL="../Typedef/Sender.ctl"/>
 		</Item>
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
 		<Item Name="Main Library.lvlib" Type="Library" URL="../Main Library.lvlib"/>
 		<Item Name="UI Main.vi" Type="VI" URL="../UI Main.vi"/>
+		<Item Name="Commands.ctl" Type="VI" URL="../Typedef/Commands.ctl"/>
+		<Item Name="Sender.ctl" Type="VI" URL="../Typedef/Sender.ctl"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="__closeStorageFromObject.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/__closeStorageFromObject.vi"/>
@@ -625,11 +625,6 @@
 				<Item Name="IMAQ Create" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ Create"/>
 				<Item Name="Color (U64)" Type="VI" URL="/&lt;vilib&gt;/vision/Image Controls.llb/Color (U64)"/>
 				<Item Name="IMAQ ArrayToColorImage" Type="VI" URL="/&lt;vilib&gt;/vision/Basics.llb/IMAQ ArrayToColorImage"/>
-				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
-				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
-				<Item Name="System Exec.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/system.llb/System Exec.vi"/>
-				<Item Name="Check if File or Folder Exists.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Check if File or Folder Exists.vi"/>
-				<Item Name="NI_PackedLibraryUtility.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/LVLibp/NI_PackedLibraryUtility.lvlib"/>
 			</Item>
 			<Item Name="lvStorage.dll" Type="Document" URL="lvStorage.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
