@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
-<Project Type="Project" LVVersion="20008000">
+<Project Type="Project" LVVersion="18008000">
 	<Property Name="varPersistentID:{9BC80F6E-A64D-4BBA-8EA3-CC5B105A9131}" Type="Ref">/My Computer/Main Library.lvlib/Schedules</Property>
 	<Item Name="My Computer" Type="My Computer">
 		<Property Name="NI.SortType" Type="Int">3</Property>
