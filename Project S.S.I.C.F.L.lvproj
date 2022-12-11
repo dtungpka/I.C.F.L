@@ -122,6 +122,18 @@
 		<Item Name="Global variable.vi" Type="VI" URL="../Global variable.vi"/>
 		<Item Name="Main Library.lvlib" Type="Library" URL="../Main Library.lvlib"/>
 		<Item Name="UI Main.vi" Type="VI" URL="../UI Main.vi"/>
+		<Item Name="FanPWM" Type="NI-DAQmx Channel">
+			<Property Name="ChanType" Type="Str">Counter Output</Property>
+			<Property Name="CO.OutputType" Type="Str">Pulse:Time</Property>
+			<Property Name="CO.Pulse.HighTime" Type="Str">0.01</Property>
+			<Property Name="CO.Pulse.IdleState" Type="Str">Low</Property>
+			<Property Name="CO.Pulse.LowTime" Type="Str">0.01</Property>
+			<Property Name="CO.Pulse.Time.InitialDelay" Type="Str">0</Property>
+			<Property Name="CO.Pulse.Time.Units" Type="Str">Seconds</Property>
+			<Property Name="Descr" Type="Str"></Property>
+			<Property Name="Name" Type="Str">FanPWM</Property>
+			<Property Name="PhysicalChanName" Type="Str">Dev3/ctr0</Property>
+		</Item>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="__closeStorageFromObject.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/storage/Storage.llb/__closeStorageFromObject.vi"/>
